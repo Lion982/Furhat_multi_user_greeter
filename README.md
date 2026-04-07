@@ -11,7 +11,7 @@ That makes it much easier to test and debug.
 
 ## Files in the overall system
 
-### 1. `demo_inference_furhat_commented.py`
+### 1. `demo_inference_furhat.py`
 This is the **front end of the perception pipeline**.
 
 Its job is to:
@@ -90,7 +90,7 @@ In simple terms, this file answers:
 The whole live system works like this:
 
 1. **Furhat camera** provides live images.
-2. **`demo_inference_furhat_commented.py`** runs AlphaPose and writes per-person JSON files.
+2. **`demo_inference_furhat.py`** runs AlphaPose and writes per-person JSON files.
 3. **`realtime_predict_ws_furhat_v5.py`** reads those JSON files and runs SocialEgoNet.
 4. It sends one live message per person to **`robot_intention_server_furhat_v5_speak.py`**.
 5. The robot-side file decides where Furhat should look and what it should say.
@@ -219,7 +219,7 @@ These are all things the offline script does not need. fileciteturn5file5�
 
 ---
 
-## How `demo_inference_furhat_commented.py` works
+## How `demo_inference_furhat.py` works
 
 This script requests frames from Furhat using the Realtime API.
 Each frame is passed through the AlphaPose pipeline:
@@ -295,7 +295,7 @@ Start the scripts in this order:
 
 1. start the robot-side server: `robot_intention_server_furhat_v5_speak.py`
 2. start the live predictor: `realtime_predict_ws_furhat_v5.py`
-3. start the Furhat/AlphaPose capture script: `demo_inference_furhat_commented.py`
+3. start the Furhat/AlphaPose capture script: `demo_inference_furhat.py`
 
 For offline testing only:
 1. make sure the pose JSON files already exist
@@ -306,7 +306,7 @@ For offline testing only:
 
 ## Settings that matter most
 
-### In `demo_inference_furhat_commented.py`
+### In `demo_inference_furhat.py`
 - `--furhat_fps`: how often to request frames
 - `--person_iou_threshold`: how strict fallback matching is
 - `--person_max_missing`: how long a person can disappear before being treated as new
