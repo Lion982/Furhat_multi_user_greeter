@@ -76,8 +76,7 @@ Pose JSON files already exist.
 It outputs one set of labels per file.
 Nothing is sent to the robot.
 ---
-Why `prediction.py` and `realtime_predict_ws_furhat_v5.py` are different:
-
+Why `prediction.py` and `realtime_predict_ws_furhat_v5.py` are different
 These two files both use SocialEgoNet, but they are for different jobs.
 `prediction.py`
 This is mainly for offline testing.
@@ -96,8 +95,7 @@ where should I look?
 has the result been stable for long enough?
 So the realtime file adds extra live logic on top of the raw model output.
 ---
-Very simple explanation of the 0.9 probability rule:
-
+Very simple explanation of the 0.9 probability rule
 When we used the more direct logic from `prediction.py`, the live system became less accurate in practice.
 That happened because `prediction.py` just takes the top class. In live use, the top class can flip on noisy frames, especially when the model is not strongly sure.
 So in `realtime_predict_ws_furhat_v5.py`, we made the rule more careful:
@@ -114,15 +112,13 @@ New idea:
 "Only call someone not interacting when the model is really sure."
 This was added because the direct argmax-style approach worked less well for the live system.
 ---
-Why this makes sense in a live system:
-
+Why this makes sense in a live system
 A live system is noisier than an offline script.
 Small changes in pose, missed keypoints, short partial views, or awkward frames can make the top class jump around.
 The interaction-initiation paper also shows that this kind of timing decision is not perfectly stable, and that some classes are harder to separate than others. The timing classifier achieved about 73.6% accuracy overall, with a lower macro F1 of 69%, and the paper notes that one class is harder to distinguish because the difference can be very small. That is another reason to be more conservative in the live robot controller. fileciteturn5file12
 So the 0.9 rule is basically a confidence check to stop the robot from switching to `No` too easily.
 ---
-How `prediction.py` works:
-
+How `prediction.py` works
 The script:
 loads the config
 builds a `JPL_Social_Dataset`
