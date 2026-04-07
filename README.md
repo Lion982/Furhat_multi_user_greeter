@@ -162,7 +162,7 @@ This was added because the direct argmax-style approach worked less well for the
 A live system is noisier than an offline script.
 Small changes in pose, missed keypoints, short partial views, or awkward frames can make the top class jump around.
 
-The interaction-initiation paper also shows that this kind of timing decision is not perfectly stable, and that some classes are harder to separate than others. The timing classifier achieved about 73.6% accuracy overall, with a lower macro F1 of 69%, and the paper notes that one class is harder to distinguish because the difference can be very small. That is another reason to be more conservative in the live robot controller. fileciteturn5file12
+The interaction-initiation paper also shows that this kind of timing decision is not perfectly stable, and that some classes are harder to separate than others. The timing classifier achieved about 73.6% accuracy overall, with a lower macro F1 of 69%, and the paper notes that one class is harder to distinguish because the difference can be very small. That is another reason to be more conservative in the live robot controller. 
 
 So the 0.9 rule is basically a **confidence check** to stop the robot from switching to `No` too easily.
 
